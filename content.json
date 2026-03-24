@@ -1,0 +1,191 @@
+{
+    "navigation": {
+        "logo": "Belagraph",
+        "links": [
+            {
+                "text": "Posters",
+                "url": "#posters"
+            },
+            {
+                "text": "Fonts",
+                "url": "#fonts"
+            },
+            {
+                "text": "About",
+                "url": "#about"
+            },
+            {
+                "text": "Contact",
+                "url": "#contact"
+            }
+        ]
+    },
+    "hero": {
+        "badge": " ",
+        "title": "Bold<br \/>Art<br \/>Works",
+        "cta_primary": {
+            "text": "Explore Collection",
+            "url": "#posters"
+        },
+        "cta_secondary": {
+            "text": "Watch Film",
+            "url": "#"
+        },
+        "images": [
+            "downloaded_assets\/uploads\/img_1772905460_69ac63f4b3b34.jpg",
+            "downloaded_assets\/uploads\/img_1772905516_69ac642c0547e.jpg",
+            "downloaded_assets\/uploads\/img_1772905460_69ac63f4b42dd.jpg"
+        ]
+    },
+    "posters": {
+        "title": "Posters",
+        "description": "Eye catching minimalist poster designs created with passion for geometry and color harmony. Each piece is a unique exploration of visual balance.",
+        "categories": [
+            "All",
+            "Abstract",
+            "Song",
+            "Golden",
+            "Minimal",
+            "Word"
+        ],
+        "items": [
+            {
+                "id": "1",
+                "title": "Eyesus",
+                "category": "Song",
+                "image": "downloaded_assets\/uploads\/img_1772899563_69ac4ceba12fb.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772899563_69ac4ceba19cd.jpg",
+                "year": "2024"
+            },
+            {
+                "id": "2",
+                "title": "Kirar",
+                "category": "Golden",
+                "image": "downloaded_assets\/uploads\/img_1772899657_69ac4d49afb25.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772899657_69ac4d49b0079.jpg",
+                "year": "2023"
+            },
+            {
+                "id": "3",
+                "title": "Negode",
+                "category": "Word",
+                "image": "downloaded_assets\/uploads\/img_1772899657_69ac4d49b053e.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772899657_69ac4d49b0a57.jpg",
+                "year": "2024"
+            },
+            {
+                "id": "4",
+                "title": "Nigus",
+                "category": "Word",
+                "image": "downloaded_assets\/uploads\/img_1772899745_69ac4da1db7f0.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772899745_69ac4da1dbb5e.jpg",
+                "year": "2023"
+            },
+            {
+                "id": "5",
+                "title": "Tesfa",
+                "category": "Abstract",
+                "image": "downloaded_assets\/uploads\/img_1772899745_69ac4da1dbfc9.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772899745_69ac4da1dc3a7.jpg",
+                "year": "2024"
+            }
+        ]
+    },
+    "about": {
+        "badge": "The Typography Passion",
+        "name": "Abel Daniel",
+        "description_1": "Hello, I'm a Graphic Designer who specializes in Typeface Design, Logo Design, Pattern Design and Brand Identity. I have more than 5 years of experience and I have well known font called \"Bela Hidase\" in Ethiopic Script.",
+        "description_2": "Every typeface, design and poster is a digital symphony where colors and shapes play the lead roles. I believe in the power of simplicity and the emotional impact of a perfectly balanced composition.",
+        "cta_text": "Download Resume",
+        "image": "downloaded_assets\/uploads\/img_1772900776_69ac51a898b7c.jpg"
+    },
+    "testimonials": [
+        {
+            "id": 1,
+            "name": "Sarah Jenkins",
+            "role": "Art Director",
+            "content": "The attention to geometric detail and color harmony is simply breathtaking. A true master of modern minimalism.",
+            "avatar": "downloaded_assets\/testimonials\/avatar_sarah_jenkins.webp"
+        },
+        {
+            "id": 2,
+            "name": "Marcus Thorne",
+            "role": "Interior Designer",
+            "content": "Each piece transforms the space it occupies. The quality and vision behind these posters is unparalleled.",
+            "avatar": "downloaded_assets\/testimonials\/avatar_marcus_thorne.webp"
+        },
+        {
+            "id": 3,
+            "name": "Elena Rossi",
+            "role": "Curator",
+            "content": "Abel Daniel continues to push the boundaries of Ethiopian typographic art. Exceptional work.",
+            "avatar": "downloaded_assets\/testimonials\/avatar_elena_rossi.webp"
+        }
+    ],
+    "fonts": {
+        "title": "Fonts",
+        "description": "Custom-crafted typefaces designed for maximum impact. Each font reflects the out-of-the-box and minimalist aesthetic.",
+        "items": [
+            {
+                "id": "f1",
+                "title": "Bela Arada",
+                "style": "Curvy",
+                "image": "downloaded_assets\/uploads\/img_1772900321_69ac4fe173b96.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772900321_69ac4fe174070.jpg",
+                "year": "2025"
+            },
+            {
+                "id": "f2",
+                "title": "Bela Dararo",
+                "style": "Brush",
+                "image": "downloaded_assets\/uploads\/img_1772900321_69ac4fe174632.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772900321_69ac4fe1749bc.jpg",
+                "year": "2024"
+            },
+            {
+                "id": "f3",
+                "title": "Bela Hidase",
+                "style": "Minimal",
+                "image": "downloaded_assets\/uploads\/img_1772900321_69ac4fe174d23.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772900321_69ac4fe175186.jpg",
+                "year": "2024"
+            },
+            {
+                "id": "f4",
+                "title": "Hidase Qedmo",
+                "style": "Brush",
+                "image": "downloaded_assets\/uploads\/img_1772900321_69ac4fe1754ef.jpg",
+                "hoverImage": "downloaded_assets\/uploads\/img_1772900321_69ac4fe175944.jpg",
+                "year": "2023"
+            }
+        ]
+    },
+    "contact": {
+        "title": "Say<br \/>Hello",
+        "email_label": "Email Address",
+        "email_value": "hello@belagraph.com",
+        "location_label": "Location",
+        "location_value": "Addis Ababa,<br \/> Ethiopia",
+        "form": {
+            "name_label": "Full Name",
+            "name_placeholder": "EX: OLIVER QUEEN",
+            "email_label": "Email Address",
+            "email_placeholder": "EX: OLIVER@QUEEN.COM",
+            "message_label": "Project Details",
+            "message_placeholder": "TELL US ABOUT YOUR VISION...",
+            "submit_btn": "Send Message Now"
+        }
+    },
+    "social": {
+        "instagram": "https://www.instagram.com/belagraph/",
+        "linkedin": "https://www.linkedin.com/in/belagraph/",
+        "telegram": "https://t.me/belagraph",
+        "tiktok": "https://tiktok.com/@belagraph"
+    },
+    "footer": {
+        "tagline": "Redefining minimalist typography since 2020. Each piece is crafted with precision and passion.",
+        "col_1_title": "",
+        "col_2_title": "",
+        "copyright": "© 2026 Abel Daniel. All rights reserved."
+    }
+}
