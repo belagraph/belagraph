@@ -45,38 +45,46 @@ export default function FontGallery({ fonts }) {
             </svg>
           </button>
           <div ref={trackRef} className="gallery__track">
-            {items.map((f) => (
-              <Link
-                key={f._id}
-                href={`/fonts/${f.slug}`}
-                className="card"
-              >
-                <div className="card__image-wrap">
-                  {f.imageUrl && (
-                    <img
-                      src={f.imageUrl}
-                      alt={f.title}
-                      className="card__image"
-                      loading="lazy"
-                    />
-                  )}
-                  {f.hoverUrl && (
-                    <img
-                      src={f.hoverUrl}
-                      alt={`${f.title} hover`}
-                      className="card__image card__image--hover"
-                      loading="lazy"
-                    />
-                  )}
-                </div>
-                <div className="card__info">
-                  <h3 className="card__title">{f.title}</h3>
-                  {f.style && (
-                    <p className="card__meta">{f.style}</p>
-                  )}
-                </div>
-              </Link>
-            ))}
+            {items.map((f) => {
+              const isSanityItem = f._id && !f._id.startsWith('f');
+              const cardContent = (
+                <>
+                  <div className="card__image-wrap">
+                    {f.imageUrl && (
+                      <img
+                        src={f.imageUrl}
+                        alt={f.title}
+                        className="card__image"
+                        loading="lazy"
+                      />
+                    )}
+                    {f.hoverUrl && (
+                      <img
+                        src={f.hoverUrl}
+                        alt={`${f.title} hover`}
+                        className="card__image card__image--hover"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                  <div className="card__info">
+                    <h3 className="card__title">{f.title}</h3>
+                    {f.style && (
+                      <p className="card__meta">{f.style}</p>
+                    )}
+                  </div>
+                </>
+              );
+
+              if (isSanityItem && f.slug) {
+                return (
+                  <Link key={f._id} href={`/fonts/${f.slug}`} className="card">
+                    {cardContent}
+                  </Link>
+                );
+              }
+              return <div key={f._id} className="card">{cardContent}</div>;
+            })}
           </div>
         </ScrollReveal>
       </div>

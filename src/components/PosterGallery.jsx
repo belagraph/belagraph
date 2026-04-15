@@ -7,9 +7,10 @@ import ScrollReveal from './ScrollReveal';
 function PosterCard({ poster }) {
   const imageUrl = poster.imageUrl;
   const hoverUrl = poster.hoverUrl;
+  const hasSlug = poster.slug && poster.slug !== poster.title?.toLowerCase().replace(/\s+/g, '-');
 
-  return (
-    <Link href={`/posters/${poster.slug}`} className="card">
+  const inner = (
+    <>
       <div className="card__image-wrap">
         {imageUrl && (
           <img
@@ -33,9 +34,17 @@ function PosterCard({ poster }) {
         {poster.price != null && (
           <p className="card__meta">{poster.price.toLocaleString()} ETB</p>
         )}
+        {!poster.price && poster.year && (
+          <p className="card__meta">{poster.year}</p>
+        )}
       </div>
-    </Link>
+    </>
   );
+
+  if (hasSlug) {
+    return <Link href={`/posters/${poster.slug}`} className="card">{inner}</Link>;
+  }
+  return <div className="card">{inner}</div>;
 }
 
 function PosterSection({ title, items }) {
@@ -89,13 +98,17 @@ function PosterSection({ title, items }) {
 }
 
 export default function PosterGallery({ topPicks, recentPosters }) {
+  const hasTopPicks = topPicks && topPicks.length > 0;
+  const hasRecent = recentPosters && recentPosters.length > 0;
+  const recentTitle = hasTopPicks ? 'Recent Posters' : 'Posters';
+
   return (
     <>
-      {topPicks && topPicks.length > 0 && (
+      {hasTopPicks && (
         <PosterSection title="Top Picks" items={topPicks} />
       )}
-      {recentPosters && recentPosters.length > 0 && (
-        <PosterSection title="Recent Posters" items={recentPosters} />
+      {hasRecent && (
+        <PosterSection title={recentTitle} items={recentPosters} />
       )}
     </>
   );

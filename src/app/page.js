@@ -18,6 +18,30 @@ function addImageUrls(items) {
   }));
 }
 
+function jsonPostersAsFallback(items) {
+  return items.map((p) => ({
+    _id: p.id,
+    title: p.title,
+    slug: p.title.toLowerCase().replace(/\s+/g, '-'),
+    imageUrl: `/${p.image}`,
+    hoverUrl: `/${p.hoverImage}`,
+    price: null,
+    year: p.year,
+  }));
+}
+
+function jsonFontsAsFallback(items) {
+  return items.map((f) => ({
+    _id: f.id,
+    title: f.title,
+    slug: f.title.toLowerCase().replace(/\s+/g, '-'),
+    style: f.style,
+    imageUrl: `/${f.image}`,
+    hoverUrl: `/${f.hoverImage}`,
+    year: f.year,
+  }));
+}
+
 export default async function Home() {
   const useSanity = isSanityConfigured();
 
@@ -25,6 +49,8 @@ export default async function Home() {
   let topPicks = [];
   let recentPosters = [];
   let fonts = [];
+  let hasSanityPosters = false;
+  let hasSanityFonts = false;
 
   if (useSanity) {
     const [s, tp, all, f] = await Promise.all([
@@ -37,51 +63,69 @@ export default async function Home() {
     topPicks = addImageUrls(tp || []);
     recentPosters = addImageUrls(all || []);
     fonts = addImageUrls(f || []);
+    hasSanityPosters = recentPosters.length > 0;
+    hasSanityFonts = fonts.length > 0;
   }
 
-  const heroData = useSanity && settings
+  if (!hasSanityPosters) {
+    const jsonPosters = jsonPostersAsFallback(content.posters.items);
+    recentPosters = jsonPosters;
+    topPicks = [];
+  }
+
+  if (!hasSanityFonts) {
+    fonts = jsonFontsAsFallback(content.fonts.items);
+  }
+
+  const hasSettings = useSanity && settings;
+
+  const heroData = hasSettings
     ? {
         title: settings.heroTitle || 'Bold<br />Art<br />Works',
         cta_primary: { text: settings.heroCtaText || 'Explore Collection', url: '#posters' },
         images: settings.heroImages
           ? settings.heroImages.map((img) => urlFor(img)?.width(1600).url()).filter(Boolean)
-          : [],
+          : content.hero.images,
       }
     : content.hero;
 
-  const aboutData = useSanity && settings
+  if (hasSettings && (!heroData.images || heroData.images.length === 0)) {
+    heroData.images = content.hero.images;
+  }
+
+  const aboutData = hasSettings
     ? {
-        badge: settings.aboutDesignerHeading || 'The Typography Passion',
-        name: settings.aboutName || 'Abel Daniel',
-        description_1: settings.aboutDescription1 || '',
-        description_2: settings.aboutDescription2 || '',
-        cta_text: settings.aboutCtaText || 'Download Resume',
+        badge: settings.aboutDesignerHeading || content.about.badge,
+        name: settings.aboutName || content.about.name,
+        description_1: settings.aboutDescription1 || content.about.description_1,
+        description_2: settings.aboutDescription2 || content.about.description_2,
+        cta_text: settings.aboutCtaText || content.about.cta_text,
         image: settings.aboutImage
           ? urlFor(settings.aboutImage)?.width(800).url()
-          : null,
+          : content.about.image,
       }
     : content.about;
 
-  const contactData = useSanity && settings
+  const contactData = hasSettings
     ? {
-        email: settings.email || 'hello@belagraph.com',
+        email: settings.email || content.contact.email_value,
         location: settings.location || 'Addis Ababa, Ethiopia',
       }
-    : content.contact;
+    : { email: content.contact.email_value, location: 'Addis Ababa, Ethiopia' };
 
-  const footerData = useSanity && settings
+  const footerData = hasSettings
     ? {
-        tagline: settings.footerTagline || '',
+        tagline: settings.footerTagline || content.footer.tagline,
         copyright: settings.copyright || `© ${new Date().getFullYear()} Abel Daniel. All rights reserved.`,
       }
     : content.footer;
 
-  const social = useSanity && settings
+  const social = hasSettings
     ? {
-        instagram: settings.socialInstagram || '',
-        linkedin: settings.socialLinkedin || '',
-        telegram: settings.socialTelegram || '',
-        tiktok: settings.socialTiktok || '',
+        instagram: settings.socialInstagram || content.social.instagram,
+        linkedin: settings.socialLinkedin || content.social.linkedin,
+        telegram: settings.socialTelegram || content.social.telegram,
+        tiktok: settings.socialTiktok || content.social.tiktok,
       }
     : content.social;
 
