@@ -322,6 +322,7 @@ button {
     padding: 40px;
     transform: translateX(100%);
     transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+    overflow-y: auto;
 }
 
 .mobile-menu.open {
@@ -1173,16 +1174,84 @@ a.card {
 }
 
 @media (max-width: 640px) {
+    .navbar {
+        padding: 14px 0;
+    }
+
+    .navbar__logo-img {
+        height: 32px;
+    }
+
+    .hero {
+        min-height: 520px;
+    }
+
     .hero__title {
         font-size: clamp(2.5rem, 12vw, 4.5rem);
+    }
+
+    .hero__content {
+        padding-bottom: 90px;
+    }
+
+    .hero__dots {
+        bottom: 20px;
     }
 
     .card {
         width: 200px;
     }
 
+    .poster-detail {
+        padding-top: 16px;
+    }
+
+    .poster-detail__nav {
+        padding-top: 8px;
+        padding-bottom: 12px;
+    }
+
+    .poster-detail__title {
+        font-size: clamp(1.8rem, 9vw, 2.6rem);
+    }
+
+    .poster-detail__options {
+        gap: 10px;
+    }
+
+    .poster-detail__option-btn {
+        width: 100%;
+        padding: 12px 14px;
+    }
+
+    .poster-detail__option-main {
+        font-size: 0.9rem;
+    }
+
+    .poster-detail__option-sub {
+        font-size: 0.75rem;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+
+    .poster-detail__section-text {
+        font-size: 0.92rem;
+    }
+
     .mobile-menu__link {
         font-size: 2rem;
+    }
+
+    .contact__info-value {
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+    }
+
+    .contact__form {
+        padding: 24px 18px;
+    }
+
+    .contact__form-submit {
+        padding: 16px;
     }
 
     .footer__top {
