@@ -19,6 +19,12 @@ export default function Hero({ data }) {
     return () => clearInterval(interval);
   }, [images.length, currentSlide]);
 
+  const getImageSrc = (src) => {
+    if (!src) return '';
+    if (src.startsWith('http')) return src;
+    return `/${src}`;
+  };
+
   return (
     <section id="hero" className="hero">
       <div className="hero__slides">
@@ -27,19 +33,18 @@ export default function Hero({ data }) {
             key={idx}
             className={`hero__slide ${idx === currentSlide ? 'active' : ''}`}
           >
-            <img src={`/${src}`} alt={`Hero image ${idx + 1}`} />
+            <img src={getImageSrc(src)} alt={`Hero image ${idx + 1}`} />
           </div>
         ))}
       </div>
       <div className="hero__overlay" />
       <div className="hero__content container">
-        <div className="hero__badge">{data?.badge}</div>
         <h1
           className="hero__title"
           dangerouslySetInnerHTML={{ __html: data?.title || '' }}
         />
         <div className="hero__cta">
-          <a href="#posters" className="btn-white">
+          <a href={data?.cta_primary?.url || '#posters'} className="btn-white">
             {data?.cta_primary?.text || 'Explore Collection'}
           </a>
         </div>

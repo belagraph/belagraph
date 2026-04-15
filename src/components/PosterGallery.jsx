@@ -1,18 +1,45 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useRef } from 'react';
+import Link from 'next/link';
 import ScrollReveal from './ScrollReveal';
 
-export default function PosterGallery({ data }) {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const trackRef = useRef(null);
-  const categories = data?.categories || [];
-  const items = data?.items || [];
+function PosterCard({ poster }) {
+  const imageUrl = poster.imageUrl;
+  const hoverUrl = poster.hoverUrl;
 
-  const filtered =
-    activeCategory === 'All'
-      ? items
-      : items.filter((p) => p.category === activeCategory);
+  return (
+    <Link href={`/posters/${poster.slug}`} className="card">
+      <div className="card__image-wrap">
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={poster.title}
+            className="card__image"
+            loading="lazy"
+          />
+        )}
+        {hoverUrl && (
+          <img
+            src={hoverUrl}
+            alt={`${poster.title} hover`}
+            className="card__image card__image--hover"
+            loading="lazy"
+          />
+        )}
+      </div>
+      <div className="card__info">
+        <h3 className="card__title">{poster.title}</h3>
+        {poster.price != null && (
+          <p className="card__meta">{poster.price.toLocaleString()} ETB</p>
+        )}
+      </div>
+    </Link>
+  );
+}
+
+function PosterSection({ title, items }) {
+  const trackRef = useRef(null);
 
   const scroll = (dir) => {
     if (!trackRef.current) return;
@@ -23,29 +50,14 @@ export default function PosterGallery({ data }) {
     });
   };
 
+  if (!items || items.length === 0) return null;
+
   return (
     <section id="posters" className="gallery-section">
       <div className="container">
         <ScrollReveal className="gallery__header">
           <div className="gallery__header-text">
-            <h2 className="heading-lg gallery__title">
-              {data?.title}
-              <span className="accent" style={{ color: 'var(--color-accent)' }}>
-                .
-              </span>
-            </h2>
-            <p className="body-text">{data?.description}</p>
-          </div>
-          <div className="gallery__filters">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                className={`filter-btn ${cat === activeCategory ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
+            <h2 className="heading-lg gallery__title">{title}</h2>
           </div>
         </ScrollReveal>
         <ScrollReveal className="gallery__viewport">
@@ -66,33 +78,25 @@ export default function PosterGallery({ data }) {
             </svg>
           </button>
           <div ref={trackRef} className="gallery__track">
-            {filtered.map((p) => (
-              <div key={p.id} className="card">
-                <div className="card__image-wrap">
-                  <img
-                    src={`/${p.image}`}
-                    alt={p.title}
-                    className="card__image"
-                    loading="lazy"
-                  />
-                  <img
-                    src={`/${p.hoverImage}`}
-                    alt={`${p.title} hover`}
-                    className="card__image card__image--hover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card__info">
-                  <h3 className="card__title">{p.title}</h3>
-                  <p className="card__meta">
-                    {p.category} · {p.year}
-                  </p>
-                </div>
-              </div>
+            {items.map((p) => (
+              <PosterCard key={p._id} poster={p} />
             ))}
           </div>
         </ScrollReveal>
       </div>
     </section>
+  );
+}
+
+export default function PosterGallery({ topPicks, recentPosters }) {
+  return (
+    <>
+      {topPicks && topPicks.length > 0 && (
+        <PosterSection title="Top Picks" items={topPicks} />
+      )}
+      {recentPosters && recentPosters.length > 0 && (
+        <PosterSection title="Recent Posters" items={recentPosters} />
+      )}
+    </>
   );
 }

@@ -1,11 +1,12 @@
 'use client';
 
 import { useRef } from 'react';
+import Link from 'next/link';
 import ScrollReveal from './ScrollReveal';
 
-export default function FontGallery({ data }) {
+export default function FontGallery({ fonts }) {
   const trackRef = useRef(null);
-  const items = data?.items || [];
+  const items = fonts || [];
 
   const scroll = (dir) => {
     if (!trackRef.current) return;
@@ -16,18 +17,14 @@ export default function FontGallery({ data }) {
     });
   };
 
+  if (items.length === 0) return null;
+
   return (
     <section id="fonts" className="gallery-section gallery-section--dark">
       <div className="container">
         <ScrollReveal className="gallery__header">
           <div className="gallery__header-text">
-            <h2 className="heading-lg gallery__title">
-              {data?.title}
-              <span className="accent" style={{ color: 'var(--color-accent)' }}>
-                .
-              </span>
-            </h2>
-            <p className="body-text">{data?.description}</p>
+            <h2 className="heading-lg gallery__title">Fonts</h2>
           </div>
         </ScrollReveal>
         <ScrollReveal className="gallery__viewport">
@@ -49,28 +46,36 @@ export default function FontGallery({ data }) {
           </button>
           <div ref={trackRef} className="gallery__track">
             {items.map((f) => (
-              <div key={f.id} className="card">
+              <Link
+                key={f._id}
+                href={`/fonts/${f.slug}`}
+                className="card"
+              >
                 <div className="card__image-wrap">
-                  <img
-                    src={`/${f.image}`}
-                    alt={f.title}
-                    className="card__image"
-                    loading="lazy"
-                  />
-                  <img
-                    src={`/${f.hoverImage}`}
-                    alt={`${f.title} hover`}
-                    className="card__image card__image--hover"
-                    loading="lazy"
-                  />
+                  {f.imageUrl && (
+                    <img
+                      src={f.imageUrl}
+                      alt={f.title}
+                      className="card__image"
+                      loading="lazy"
+                    />
+                  )}
+                  {f.hoverUrl && (
+                    <img
+                      src={f.hoverUrl}
+                      alt={`${f.title} hover`}
+                      className="card__image card__image--hover"
+                      loading="lazy"
+                    />
+                  )}
                 </div>
                 <div className="card__info">
                   <h3 className="card__title">{f.title}</h3>
-                  <p className="card__meta">
-                    {f.style} · {f.year}
-                  </p>
+                  {f.style && (
+                    <p className="card__meta">{f.style}</p>
+                  )}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </ScrollReveal>

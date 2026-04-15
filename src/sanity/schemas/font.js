@@ -10,6 +10,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'style',
       title: 'Style',
       type: 'string',
@@ -27,14 +34,36 @@ export default {
       options: { hotspot: true },
     },
     {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 4,
+    },
+    {
+      name: 'specimen',
+      title: 'Type Specimen Image',
+      type: 'image',
+      options: { hotspot: true },
+    },
+    {
+      name: 'downloadUrl',
+      title: 'Download / Purchase URL',
+      type: 'url',
+    },
+    {
       name: 'year',
       title: 'Year',
       type: 'string',
     },
+  ],
+  orderings: [
     {
-      name: 'order',
-      title: 'Display Order',
-      type: 'number',
+      title: 'Newest First',
+      name: 'createdDesc',
+      by: [{ field: '_createdAt', direction: 'desc' }],
     },
   ],
+  preview: {
+    select: { title: 'title', media: 'image', subtitle: 'style' },
+  },
 };
