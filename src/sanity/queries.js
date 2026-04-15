@@ -8,7 +8,8 @@ export async function getPosters() {
       "slug": slug.current,
       image,
       hoverImage,
-      price,
+      basePrice,
+      "startingPrice": sizes[0].price,
       isTopPick,
       year,
       _createdAt
@@ -24,7 +25,8 @@ export async function getTopPicks() {
       "slug": slug.current,
       image,
       hoverImage,
-      price,
+      basePrice,
+      "startingPrice": sizes[0].price,
       year
     }`
   );
@@ -38,7 +40,7 @@ export async function getPosterBySlug(slug) {
       "slug": slug.current,
       image,
       hoverImage,
-      price,
+      basePrice,
       sizes,
       frameOptions,
       description,

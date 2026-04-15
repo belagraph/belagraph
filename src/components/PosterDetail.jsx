@@ -11,6 +11,11 @@ export default function PosterDetail({ poster, imageUrl, hoverUrl }) {
   const sizes = poster.sizes || [];
   const frames = poster.frameOptions || [];
 
+  const sizePrice = sizes[selectedSize]?.price || 0;
+  const framePrice = frames[selectedFrame]?.price || 0;
+  const totalPrice = sizePrice + framePrice;
+  const hasPrice = sizePrice > 0 || poster.basePrice > 0;
+
   return (
     <div className="poster-detail">
       <div className="poster-detail__nav container">
@@ -47,10 +52,19 @@ export default function PosterDetail({ poster, imageUrl, hoverUrl }) {
         <div className="poster-detail__info">
           <h1 className="poster-detail__title">{poster.title}</h1>
 
-          {poster.price != null && (
-            <p className="poster-detail__price">
-              {poster.price.toLocaleString()} ETB
-            </p>
+          {hasPrice && (
+            <div className="poster-detail__price-block">
+              <p className="poster-detail__price">
+                {(totalPrice || poster.basePrice || 0).toLocaleString()} ETB
+              </p>
+              {sizePrice > 0 && framePrice > 0 && (
+                <p className="poster-detail__price-breakdown">
+                  {sizes[selectedSize]?.label} ({sizePrice.toLocaleString()})
+                  {' + '}
+                  {frames[selectedFrame]?.name} (+{framePrice.toLocaleString()})
+                </p>
+              )}
+            </div>
           )}
 
           {sizes.length > 0 && (
@@ -64,7 +78,10 @@ export default function PosterDetail({ poster, imageUrl, hoverUrl }) {
                     onClick={() => setSelectedSize(i)}
                   >
                     <span className="poster-detail__option-main">{s.label}</span>
-                    <span className="poster-detail__option-sub">{s.dimensions}</span>
+                    <span className="poster-detail__option-sub">
+                      {s.dimensions}
+                      {s.price > 0 && ` — ${s.price.toLocaleString()} ETB`}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -82,9 +99,9 @@ export default function PosterDetail({ poster, imageUrl, hoverUrl }) {
                     onClick={() => setSelectedFrame(i)}
                   >
                     <span className="poster-detail__option-main">{f.name}</span>
-                    {f.priceModifier > 0 && (
+                    {f.price > 0 && (
                       <span className="poster-detail__option-sub">
-                        +{f.priceModifier.toLocaleString()} ETB
+                        +{f.price.toLocaleString()} ETB
                       </span>
                     )}
                   </button>

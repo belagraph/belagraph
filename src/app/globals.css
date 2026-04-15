@@ -601,11 +601,22 @@ button {
     margin-bottom: 12px;
 }
 
+.poster-detail__price-block {
+    margin-bottom: 32px;
+}
+
 .poster-detail__price {
     font-size: clamp(1.2rem, 2vw, 1.6rem);
     font-weight: 700;
     color: var(--color-accent);
-    margin-bottom: 32px;
+    transition: all 0.2s ease;
+}
+
+.poster-detail__price-breakdown {
+    font-size: 0.78rem;
+    color: var(--color-text-light);
+    margin-top: 4px;
+    font-weight: 500;
 }
 
 .poster-detail__option-group {

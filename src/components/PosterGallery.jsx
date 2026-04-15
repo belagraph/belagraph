@@ -31,12 +31,13 @@ function PosterCard({ poster }) {
       </div>
       <div className="card__info">
         <h3 className="card__title">{poster.title}</h3>
-        {poster.price != null && (
-          <p className="card__meta">{poster.price.toLocaleString()} ETB</p>
-        )}
-        {!poster.price && poster.year && (
+        {(poster.startingPrice || poster.basePrice) ? (
+          <p className="card__meta">
+            From {(poster.startingPrice || poster.basePrice).toLocaleString()} ETB
+          </p>
+        ) : poster.year ? (
           <p className="card__meta">{poster.year}</p>
-        )}
+        ) : null}
       </div>
     </>
   );

@@ -30,9 +30,10 @@ export default {
       options: { hotspot: true },
     },
     {
-      name: 'price',
-      title: 'Price (ETB)',
+      name: 'basePrice',
+      title: 'Base Price (ETB)',
       type: 'number',
+      description: 'Starting price shown on the card',
     },
     {
       name: 'sizes',
@@ -44,18 +45,16 @@ export default {
           fields: [
             { name: 'label', title: 'Label', type: 'string' },
             { name: 'dimensions', title: 'Dimensions', type: 'string' },
+            { name: 'price', title: 'Price (ETB)', type: 'number', description: 'Price for this size' },
           ],
           preview: {
-            select: { title: 'label', subtitle: 'dimensions' },
+            select: { title: 'label', sub1: 'dimensions', sub2: 'price' },
+            prepare: ({ title, sub1, sub2 }) => ({
+              title,
+              subtitle: `${sub1 || ''}${sub2 ? ` — ${sub2} ETB` : ''}`,
+            }),
           },
         },
-      ],
-      initialValue: [
-        { label: 'A2', dimensions: '42×59.4cm' },
-        { label: '60×80', dimensions: '60×80cm' },
-        { label: '60×90', dimensions: '60×90cm' },
-        { label: '50×70', dimensions: '50×70cm' },
-        { label: 'Custom', dimensions: 'Custom size' },
       ],
     },
     {
@@ -67,18 +66,16 @@ export default {
           type: 'object',
           fields: [
             { name: 'name', title: 'Frame Name', type: 'string' },
-            { name: 'priceModifier', title: 'Additional Price', type: 'number' },
+            { name: 'price', title: 'Additional Price (ETB)', type: 'number', description: 'Extra cost for this frame' },
           ],
           preview: {
-            select: { title: 'name', subtitle: 'priceModifier' },
+            select: { title: 'name', price: 'price' },
+            prepare: ({ title, price }) => ({
+              title,
+              subtitle: price ? `+${price} ETB` : 'Included',
+            }),
           },
         },
-      ],
-      initialValue: [
-        { name: 'Unframed', priceModifier: 0 },
-        { name: 'White Frame', priceModifier: 0 },
-        { name: 'Natural Wood Frame', priceModifier: 0 },
-        { name: 'Custom', priceModifier: 0 },
       ],
     },
     {
