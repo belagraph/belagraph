@@ -1,14 +1,9 @@
-import { getPosterBySlug, getPosters } from '@/sanity/queries';
+import { getPosterBySlug } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { notFound } from 'next/navigation';
 import PosterDetail from '@/components/PosterDetail';
 
-export async function generateStaticParams() {
-  const posters = await getPosters();
-  return posters
-    .filter((p) => p.slug)
-    .map((p) => ({ slug: p.slug }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }) {
   const poster = await getPosterBySlug(params.slug);

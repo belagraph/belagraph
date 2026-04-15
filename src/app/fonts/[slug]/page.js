@@ -1,14 +1,9 @@
-import { getFontBySlug, getFonts } from '@/sanity/queries';
+import { getFontBySlug } from '@/sanity/queries';
 import { urlFor } from '@/sanity/image';
 import { notFound } from 'next/navigation';
 import FontDetail from '@/components/FontDetail';
 
-export async function generateStaticParams() {
-  const fonts = await getFonts();
-  return fonts
-    .filter((f) => f.slug)
-    .map((f) => ({ slug: f.slug }));
-}
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }) {
   const font = await getFontBySlug(params.slug);

@@ -2,6 +2,8 @@ import { getPosters, getTopPicks, getFonts, getSiteSettings } from '@/sanity/que
 import { urlFor } from '@/sanity/image';
 import { isSanityConfigured } from '@/sanity/client';
 import content from '@/data/content.json';
+
+export const dynamic = 'force-dynamic';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import PosterGallery from '@/components/PosterGallery';
